@@ -1,0 +1,123 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@100..900&family=Vazirmatn:wght@100..900&display=swap'); */
+@import "tailwindcss";
+
+@font-face {
+  font-family: 'Vazirmatn';
+  src: url('../fonts/vazirmatn/Vazirmatn[wght].woff2') format("woff2-variations");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  font-family: "Vazirmatn", sans-serif;
+}
+
+
+.transition_01 {
+  transition: all 0.2s ease;
+  color: rgb(255, 255, 255);
+}
+
+@theme {
+  --color-hover_a_tag: rgb(200, 200, 200);
+}
+
+.a_tag {
+  user-select: none;
+}
+
+.a_tag:hover {
+  color: var(--color-hover_a_tag) !important;
+}
+
+.header_list {
+  @apply flex items-center cursor-pointer py-2 pr-3 rounded-md;
+}
+
+.header_list i {
+  @apply ml-2;
+}
+
+
+
+.header_list:active i {
+  @apply top-0.5;
+}
+
+.header_box {
+  @apply  lg:hidden box-border w-[calc(100%-3rem)] left-6 -top-1 p-4 absolute rounded-md border-none bg-gray-900 shadow-gray-700 shadow-[0_0_5px_rgba(0,0,0,2.8)];
+}
+
+
+.header_list_box {
+  @apply absolute top-17 left-1/2 transform -translate-x-1/2 w-[800px] 2xl:w-[1300px] py-5 flex flex-wrap gap-5 justify-around border-none bg-gray-800 shadow-gray-700 shadow-[0_0_5px_rgba(0,0,0,2.8)];
+}
+
+.header_box_more_tag {
+  @apply w-90 h-22 flex hover:scale-102 justify-start items-center p-2;
+}
+
+.header_box_more_tag i {
+  @apply text-2xl ml-5 relative;
+}
+
+
+.header_box_more_tag:hover i {
+  @apply right-3;
+}
+
+.text_filter_01{
+  @apply font-bold text-gray-300 text-xl p-3 border-gray-700 border-b-2 flex justify-between;
+}
+
+.text_filter_01 i{
+  @apply relative;
+}
+
+.text_filter_01:active i{
+  @apply top-0.5;
+}
+
+.product_features{
+  @apply text-gray-400 font-medium bg-gray-950 shadow-2xl p-4 rounded-3xl;
+}
+
+.product_features h2{
+  @apply text-white;
+}
+
+.product_features_box{
+  @apply rounded-xl border-gray-700 p-5 border-2 border-gray-700 rounded-2xl  flex flex-wrap my-7 gap-3 items-center shadow-lg shadow-black;
+}
+
+.product_features_box h2{
+  @apply ml-3;
+}
+
+.btn{
+  @apply  text-center transition-all font-bold rounded-3xl shadow-sm border-2 border-gray-700 
+   bg-gradient-to-br from-cyan-400/15 to-gray-700/20 shadow-gray-950 hover:bg-cyan-400/5 hover:shadow-cyan-400/10 hover:border-cyan-400 hover:text-cyan-400
+   min-w-25 px-5 py-3 text-sm sm:min-w-30 sm:px-7 sm:py-4 sm:text-base md:min-w-37 md:px-9 md:py-5 md:text-lg;
+}
+
+.footer{
+  @apply text-base mx-10 sm:mx-7 lg:mx-3;
+}
+
+.footer h2{
+  @apply text-white text-lg font-bold border-b-2 border-cyan-400 w-fit pb-2 mb-7;
+}
+
+.footer a{
+  @apply flex items-center transition-all duration-300 hover:-translate-x-2 hover:text-cyan-400 !w-fit;
+}
+
+.footer li i{
+  @apply ml-2;
+}
+
+.footer li{
+  @apply flex mt-3 items-center;
+}
+

@@ -1,0 +1,16 @@
+<section class="my-12">
+  <div class="mb-5">
+    <div class="flex items-center">
+      <div class="h-9 w-0.5 bg-cyan-600 ml-4"></div>
+      <h2 class="text-3xl font-bold">{{ category.0 }}</h2>
+    </div>
+    <p class="mt-1 text-gray-400">تعداد
+      {{ object_list|length }}
+      انتخاب</p>
+  </div>
+  <div class="flex justify-center gap-[1vw] text-base font-semibold flex-wrap w-full px-10 py-7 rounded-2xl border-2 border-gray-700 shadow-2xl shadow-gray-950 bg-gray-800/50">
+    {% for object in object_list %}
+      <a href="{% url 'product_list_page' %}?{{ item }}={{ object.name }}" class="hover:scale-102 btn">{{ object }}</a>
+    {% endfor %}
+  </div>
+</section>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>پارچه سرای زاگرس</title>
+    <link rel="stylesheet" href="{% static 'fonts/fontawesome/css/all.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/main_style.css' %}" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4" defer></script>
+  </head>
+  <body class="bg-gray-900 max-w-[1680px] m-auto relative text-gray-50 px-5">
+    {% include 'includes/header.html' %}
+    {% block content %}
+
+    {% endblock %}
+
+    {% load static %}
+
+    {% include 'includes/footer.html' %}
+
+    <script src="{% static 'javascript/main_script.js' %}"></script>
+    {% block script %}
+
+    {% endblock %}
+  </body>
+</html>

@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <section class="px-10 py-20 hidden xl:block">
+    <section class="border-gray-700 px-12 pb-5 mb-15 -mx-5 border-b-2 flex items-center justify-between">
+      <h1 class="text-gray-200 text-5xl">{{ fabric.name }}</h1>
+      <div class="flex mx-7 items-center text-green-300 text-xl">
+        <h2 class="ml-3">
+          قیمت هر متر پارچه:
+          <span class="price ml-1 mr-3">{{ fabric.price }}</span>
+          تومان
+        </h2>
+      </div>
+    </section>
+    <section class="flex">
+      <img src="{% static 'images/test.jpeg' %}" alt="" class="w-[500px] h-[500px] rounded-3xl" />
+      <div class="px-20 py-10 w-full font-bold">
+        <div class="product_features_box">
+          <h2>رنگ پارچه:</h2>
+          <div class="flex flex-wrap w-fit max-w-120">
+            {% for color in fabric.color.all %}
+              <div class="product_features ml-3">
+                <p class="p-2 border-b-8" style="border-color: {{ color.hex_code }};">{{ color.name }}</p>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+        <div class="product_features_box">
+          <h2>کاربرد پارچه:</h2>
+          {% for usage in fabric.usage.all %}
+            <p class="product_features">{{ usage }}</p>
+          {% endfor %}
+        </div>
+        <section class="flex flex-wrap gap-7 mt-9">
+          <div class="product_features product_features_box w-fit !py-7 justify-center shadow-lg shadow-black !px-10 !rounded-full !m-0">
+            <h2 class="">جنس پارچه:</h2>
+            <p class="">{{ fabric.material }}</p>
+          </div>
+          <div class="product_features product_features_box w-fit !py-7 justify-center shadow-lg shadow-black !px-10 !rounded-full !m-0">
+            <h2 class="">طرح پارچه:</h2>
+            <p class="">{{ fabric.pattern }}</p>
+          </div>
+          <div class="product_features product_features_box w-fit !py-7 justify-center shadow-lg shadow-black !px-10 !rounded-full !m-0">
+            <h2 class="">ضخامت پارچه:</h2>
+            <p class="">{{ fabric.get_thickness_display }}</p>
+          </div>
+          <div class="product_features product_features_box w-fit !py-7 justify-center shadow-lg shadow-black !px-10 !rounded-full !m-0">
+            <h2 class="">عرض پارچه:</h2>
+            <p class="">{{ fabric.width }}</p>
+          </div>
+          <div class="product_features product_features_box w-fit !py-7 justify-center shadow-lg shadow-black !px-10 !rounded-full !m-0">
+            <h2 class="">مقدار موجودی پارچه:</h2>
+            <p class="">{{ fabric.inventory|floatformat:0 }} متر</p>
+          </div>
+        </section>
+      </div>
+    </section>
+  </section>
+
+  <section class="px-10 py-20 xl:hidden">
+    <section class="border-gray-700 px-12 pb-5 mb-15 -mx-5 border-b-2">
+      <h1 class="text-gray-200 text-5xl text-center">{{ fabric.name }}</h1>
+    </section>
+    <img src="{% static 'images/test.jpeg' %}" alt="" class="max-w-[500px] w-full aspect-square rounded-3xl mx-auto" />
+    <div class="px-0 sm:px-5 md:px-10 lg:px-30 py-10 w-full font-bold">
+      <div class="product_features_box">
+        <h2>رنگ پارچه:</h2>
+        <div class="flex flex-wrap w-fit max-w-120">
+          {% for color in fabric.color.all %}
+            <div class="product_features ml-3">
+              <p class="p-2 border-b-8" style="border-color: {{ color.hex_code }};">{{ color.name }}</p>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="product_features_box">
+        <h2>کاربرد پارچه:</h2>
+        {% for usage in fabric.usage.all %}
+          <p class="product_features">{{ usage }}</p>
+        {% endfor %}
+      </div>
+      <section class="flex flex-wrap gap-7 mt-9">
+        <div class="product_features product_features_box w-fit !py-7 justify-center shadow-lg shadow-black !px-10 !rounded-full !m-0">
+          <h2 class="">جنس پارچه:</h2>
+          <p class="">{{ fabric.material }}</p>
+        </div>
+        <div class="product_features product_features_box w-fit !py-7 justify-center shadow-lg shadow-black !px-10 !rounded-full !m-0">
+          <h2 class="">طرح پارچه:</h2>
+          <p class="">{{ fabric.pattern }}</p>
+        </div>
+        <div class="product_features product_features_box w-fit !py-7 justify-center shadow-lg shadow-black !px-10 !rounded-full !m-0">
+          <h2 class="">ضخامت پارچه:</h2>
+          <p class="">{{ fabric.get_thickness_display }}</p>
+        </div>
+        <div class="product_features product_features_box w-fit !py-7 justify-center shadow-lg shadow-black !px-10 !rounded-full !m-0">
+          <h2 class="">عرض پارچه:</h2>
+          <p class="">{{ fabric.width }}</p>
+        </div>
+        <div class="product_features product_features_box w-fit !py-7 justify-center shadow-lg shadow-black !px-10 !rounded-full !m-0">
+          <h2 class="">مقدار موجودی پارچه:</h2>
+          <p class="">{{ fabric.inventory|floatformat:0 }} متر</p>
+        </div>
+      </section>
+    </div>
+    <section class=" bg-gray-900 text-green-300 fixed bottom-0 left-2 right-2">
+      <div class="w-9/10 border-t-2 border-gray-700 mx-auto"></div>
+      <h2 class="ml-3 text-center my-5 sm:text-xl text-base">
+        قیمت هر متر پارچه:
+        <span class="price ml-1 mr-3">{{ fabric.price }}</span>
+        تومان
+      </h2>
+    </section>
+  </section>
+{% endblock %}

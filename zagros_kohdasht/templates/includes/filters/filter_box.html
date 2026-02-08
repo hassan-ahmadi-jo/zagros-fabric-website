@@ -1,0 +1,26 @@
+<section class="w-full border-2 border-gray-700 rounded-2xl mt-20 px-5 py-5">
+  <div>
+    <p class="text-2xl text-gray-400 font-bold text-center mb-5">
+      <i class="fa-solid fa-filter ml-2"></i>
+      فیلترها
+    </p>
+  </div>
+  <form method="GET" class="text-xl text-amber-50" id="filter_form">
+    {% with size_type='_desktop' %}
+      {% for all_items, selected_items, verbose, filter_item in filter_attributes %}
+        {% include 'includes/filters/attribute.html' %}
+      {% endfor %}
+    {% endwith %}
+    <div class="flex flex-wrap items-center gap-5 flex-col mt-7">
+      <button type="submit" class="px-5 py-2 border-2 rounded-2xl text-base text-green-500 cursor-pointer">
+        <i class="fa-solid fa-check"></i>
+        اعمال فیلترها
+      </button>
+
+      <a href="{% url 'product_list_page' %}" class="px-5 py-2 border-2 rounded-2xl text-base text-red-500 cursor-pointer">
+        <i class="fa-solid fa-xmark"></i>
+        حذف فیلترها
+      </a>
+    </div>
+  </form>
+</section>

@@ -1,0 +1,17 @@
+{% load static %}
+<a href="{% url 'product_list_page'%}?{{type}}={{title}}">
+  <section class="w-90 h-25 flex a_tag hover:scale-102">
+    <img src="{% static 'images/test.jpeg' %}" alt="نوع پارچه" class="h-full aspect-square object-cover rounded-md" />
+    <div>
+      <h1 class="text-xl mb-2.5 mt-2.5 mr-4 line-clamp-1">
+        <i class="fa-solid fa-shirt"></i>
+        {{ title }}
+      </h1>
+      <p class="mr-2 line-clamp-2 text-sm">
+        {% for i in description %}
+          {{ i }}{% if not forloop.last %}, {% endif %}
+        {% endfor %}
+      </p>
+    </div>
+  </section>
+</a>

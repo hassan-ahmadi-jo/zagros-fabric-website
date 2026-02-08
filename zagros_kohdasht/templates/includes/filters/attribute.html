@@ -1,0 +1,30 @@
+<div class="text_filter_01 cursor-pointer mt-5" id="{{"filter_attribute_"|add:filter_item|add:size_type}}">
+  <div class="flex gap-2">
+    <p>{{verbose}}</p>
+    {% if selected_items|length > 0 %}
+      <p class="text-sm text-gray-500">{{selected_items|length}}</p>
+    {% endif %}
+  </div>
+  <i class="fa-solid fa-caret-down"></i>
+</div>
+<section class="flex flex-wrap gap-2 max-h-50 overflow-y-auto text-sm mt-2 hidden" id="{{"filter_attribute_"|add:filter_item|add:size_type|add:"_box"}}">
+  {% for item in all_items %}
+    <label class="flex flex-wrap items-center cursor-pointer hover:bg-gray-800 w-fit min-w-27">
+      {% if filter_item == "thickness" %}
+        <input type="checkbox" name="{{filter_item}}" value="{{ item }}" class="hidden peer" 
+        {% if item|stringformat:"s" in selected_items %}checked{% endif %}/>
+      {% else %}
+        <input type="checkbox" name="{{filter_item}}" value="{{ item.name }}" class="hidden peer" 
+      {% if item.name|stringformat:"s" in selected_items %}checked{% endif %}/>
+      {% endif %}
+      
+      {% if filter_item == "color" %}
+        <span class="w-5 h-5 rounded-full " style="background-color: {{ item.hex_code }};"></span>
+      {% endif %}
+      <span class="mr-2 my-3 pb-1 border-gray-100 peer-checked:text-emerald-400 transition-all peer-checked:border-b-2">{{ item }}</span>
+    </label>
+  {% empty %}
+    <p>برای این بخش فیلتر وجود ندارد</p>
+  {% endfor %}
+</section>
+

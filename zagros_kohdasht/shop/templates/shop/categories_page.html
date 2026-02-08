@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <header>
+    <h2 class="text-5xl font-black mt-20 text-center text-cyan-200">دسته بندی‌ها</h2>
+    <p class="text-center my-3 text-lg">چه چیزی مد نظر شماست؟</p>
+  </header>
+  <main class="max-w-300 mx-auto">
+    {% for item, category in categories_list.items %}
+      {% with object_list=category.1 %}
+        {% include 'includes/categories_page_box.html' %}
+      {% endwith %}
+    {% endfor %}
+  </main>
+  <footer class="my-20">
+    <a href="{% url 'index_page' %}" class="mx-auto btn flex w-fit items-center">
+      <i class="fa-solid fa-arrow-left-long ml-2"></i>
+      <p>بازگشت به صفحه اصلی</p>
+    </a>
+  </footer>
+{% endblock %}

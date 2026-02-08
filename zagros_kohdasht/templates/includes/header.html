@@ -1,0 +1,156 @@
+{% load static %}
+
+<header class="px-10 mt-11 py-3 border-gray-800 border-b-2 sticky top-0 bg-gray-900 break-after-all:bg-gray-100 z-50">
+  <section class="items-start lg:items-center flex justify-between lg:justify-around xl:justify-between">
+    <a href="{% url 'index_page' %}" class="a_tag"><img src="{% static 'images/zagros_logo.png' %}" alt="پارچه سرای زاگرس" class="w-50 sm:w-50" /></a>
+    <ul class="hidden gap-7 justify-center lg:flex xl:gap-12">
+      <li class="header_list a_tag transition_01">
+        <a href="{% url 'product_list_page' %}">همه محصولات</a>
+      </li>
+      <div class="relative">
+        <li class="header_list a_tag transition_01" id="header_ul_1">
+          <i class="fa-solid fa-caret-down relative"></i>
+          <p>طرح پارچه</p>
+        </li>
+        <div class="opacity-0 pointer-events-none" id="header_ul_1_os">
+          <div class="header_list_box scale-95 opacity-70 transition_01" id="header_ul_1_box">
+            {% with type='pattern' %}
+              {% for title, description in pattern_dict.items %}
+                {% if forloop.counter <= 5 %}
+                  {% include 'includes/header_menu_product.html' %}
+                {% endif %}
+              {% endfor %}
+            {% endwith %}
+            <a href="{% url 'categories_page' %}" class="header_box_more_tag">
+              <i class="fa-solid fa-angles-left"></i>
+              <p>همه موارد</p>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="relative">
+        <li class="header_list a_tag transition_01" id="header_ul_2">
+          <i class="fa-solid fa-caret-down relative"></i>
+          <p>کاربرد پارچه</p>
+        </li>
+        <div class="opacity-0 pointer-events-none" id="header_ul_2_os">
+          <div class="header_list_box scale-95 opacity-70 transition_01" id="header_ul_2_box">
+            {% with type='usage' %}
+              {% for title, description in usage_dict.items %}
+                {% if forloop.counter <= 5 %}
+                  {% include 'includes/header_menu_product.html' %}
+                {% endif %}
+              {% endfor %}
+            {% endwith %}
+            <a href="{% url 'categories_page' %}" class="header_box_more_tag">
+              <i class="fa-solid fa-angles-left"></i>
+              <p>همه موارد</p>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="relative">
+        <li class="header_list a_tag transition_01" id="header_serch">
+          <i class="fa-solid fa-magnifying-glass relative"></i>
+          <p>جستجو</p>
+        </li>
+        <div class="opacity-0 pointer-events-none" id="header_serch_os">
+          <div class="scale-95 opacity-70 transition_01 absolute top-7 left-1/2 transform -translate-x-1/2 flex flex-wrap gap-5 justify-around border-none" id="header_serch_box">
+            {% with serch_type='desktop' %}
+              {% include 'includes/header_serch_box.html' %}
+            {% endwith %}
+          </div>
+        </div>
+      </div>
+
+      <li class="a_tag transition_01">
+        <a href="{% url 'contact_us_page' %}" class="header_list">
+          <i class="fa-solid fa-phone"></i>
+          <p>تماس</p>
+        </a>
+      </li>
+      <li class="a_tag transition_01 xl:!hidden">
+        <a href="{% url 'address_page' %}" class="header_list">
+            <i class="fa-solid fa-location-dot"></i>
+            <p>نشانی</p>
+          </a>
+      </li>
+    </ul>
+    <a href="{% url 'address_page' %}" class="a_tag transition_01 px-8 py-3 rounded-lg border-2 mx-10 hidden xl:block">
+      <i class="fa-solid fa-location-dot"></i>
+      نشانی
+    </a>
+    <i class="fa-solid fa-bars lg:!hidden text-2xl transition_01" id="header_bars"></i>
+  </section>
+  <section class="opacity-0 pointer-events-none" id="header_bars_os">
+    <section class="scale-95 opacity-70 header_box transition_01" id="header_bars_box">
+      <div class="flex justify-between items-start mt-0.5">
+        <a href="{% url 'index_page' %}"><img src="{% static 'images/zagros_logo.png' %}" alt="پارچه سرای زاگرس" class="w-50 sm:w-50" /></a>
+        <i class="fa-solid fa-xmark text-2xl transition_01" id="header_bars_close"></i>
+      </div>
+      <ul class="flex flex-col gap-1 py-7 overflow-y-auto max-h-[calc(90vh-150px)]">
+        <li class="header_list max-w-50">
+          <a href="{% url 'product_list_page' %}"><p>همه محصولات</p></a>
+        </li>
+        <li>
+          <section class="header_list max-w-50" id="header_ul_1_mobile">
+            <i class="fa-solid fa-caret-down relative"></i>
+            <p>نوع پارچه</p>
+          </section>
+          <section class="mr-10 pb-7 hidden" id="header_ul_1_mobile_box">
+            {% for title, description in pattern_dict.items %}
+              {% if forloop.counter <= 5 %}
+                <div class="flex my-2">
+                  <div class="w-0.5 bg-cyan-400 h-7 items-center ml-2 rounded-2xl"></div>
+                  <a href="{% url 'product_list_page' %}?pattern={{ title }}" class="block !mx-0">{{ title }}</a>
+                </div>
+                <div class="w-9/10 border-gray-700 rounded-2xl {% if not forloop.last %} border-b-2 {% endif %}"></div>
+              {% endif %}
+            {% endfor %}
+          </section>
+        </li>
+        <li>
+          <section class="header_list max-w-50" id="header_ul_2_mobile">
+            <i class="fa-solid fa-caret-down relative"></i>
+            <p>کاربرد پارچه</p>
+          </section>
+          <section class="mr-10 pb-7 hidden" id="header_ul_2_mobile_box">
+            {% for title, description in usage_dict.items %}
+              {% if forloop.counter <= 5 %}
+                <div class="flex my-2">
+                  <div class="w-0.5 bg-cyan-400 h-7 items-center ml-2 rounded-2xl"></div>
+                  <a href="{% url 'product_list_page' %}?usage={{ title }}" class="block !mx-0">{{ title }}</a>
+                </div>
+                <div class="w-9/10 border-gray-700 rounded-2xl {% if not forloop.last %} border-b-2 {% endif %}"></div>
+              {% endif %}
+            {% endfor %}
+          </section>
+        </li>
+        <li>
+          <section class="header_list max-w-50" id="header_serch_mobile">
+            <i class="fa-solid fa-magnifying-glass relative"></i>
+            <p>جستجو</p>
+          </section>
+          <section class="mr-10 pb-7 hidden" id="header_serch_mobile_box">
+            {% with serch_type='mobile' %}
+              {% include 'includes/header_serch_box.html' %}
+            {% endwith %}
+          </section>
+        </li>
+        <li class="max-w-50">
+          <a href="{% url 'contact_us_page' %}" class="header_list">
+            <i class="fa-solid fa-phone"></i>
+            <p>تماس</p>
+          </a>
+        </li>
+        <li class="max-w-50">
+          <a href="{% url 'address_page' %}" class="header_list">
+            <i class="fa-solid fa-location-dot"></i>
+            <p>نشانی</p>
+          </a>
+        </li>
+      </ul>
+    </section>
+  </section>
+</header>

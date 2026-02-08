@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  {% include 'includes/filters/filter_box_mobile.html' %}
+  <section class="flex items-start content-start">
+    <div class="hidden w-[400px] bg-amber-70 lg:block">
+      {% include 'includes/filters/filter_box.html' %}
+    </div>
+    <div class="flex flex-wrap p-10 w-full gap-1 items-start content-start justify-start">
+      {% for fabric in fabrics_data %}
+        {% include 'includes/product_box.html' %}
+      {% endfor %}
+    </div>
+  </section>
+{% endblock %}
+
+{% block script %}
+  <script src="{% static 'javascript/product_list.js' %}"></script>
+{% endblock %}

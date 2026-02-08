@@ -1,0 +1,84 @@
+{% load static %}
+<footer>
+  <footer class="mt-19 border-y-2 border-gray-800 pt-16 pb-8 text-gray-300 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+    <section class="footer">
+      <a href="{% url 'index_page' %}" class="a_tag"><img src="{% static 'images/zagros_logo.png' %}" alt="پارچه سرای زاگرس" class="w-40" /></a>
+      <p class="text-gray-400 text-sm text leading-7 text-justify mt-9">پارچه سرای زاگرس با ارائه بهترین پارچه‌های مجلسی و روزمره، کیفیت و زیبایی را به دوخت شما هدیه می‌دهد. تنوع طرح و رنگ را با ما تجربه کنید.</p>
+    </section>
+    <section class="footer">
+      <h2>دسترسی سریع</h2>
+      <ul>
+        <li>
+          <a href="{% url 'index_page' %}">
+            <i class="fa-solid fa-angle-left"></i>
+            <p>صفحه اصلی</p>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'product_list_page' %}">
+            <i class="fa-solid fa-angle-left"></i>
+            <p>محصولات</p>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'categories_page' %}">
+            <i class="fa-solid fa-angle-left"></i>
+            <p>دسته بندی‌ها</p>
+          </a>
+        </li>
+        {% comment %} <li>
+          <a href="{% url 'contact_us_page' %}">
+            <i class="fa-solid fa-angle-left"></i>
+            <p>تماس با ما</p>
+          </a>
+        </li> {% endcomment %}
+        <li>
+          <a href="{% url 'address_page' %}">
+            <i class="fa-solid fa-angle-left"></i>
+            <p>نشانی</p>
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <section class="footer">
+      <h2>محصولات منتخب</h2>
+      {% for usage in usage_dict %}
+        {% if forloop.counter < 5 %}
+          <ul>
+            <li>
+              <a href="{% url 'product_list_page' %}?usage={{usage.name}}">
+                <i class="fa-solid fa-angle-left"></i>
+                <p>{{ usage }}</p>
+              </a>
+            </li>
+          </ul>
+        {% endif %}
+      {% endfor %}
+    </section>
+
+    <section class="footer !text-sm">
+      <h2>اطلاعات تماس</h2>
+      <ul>
+        <li>
+          <p>
+            <i class="fa-solid fa-location-dot text-cyan-400"></i>
+            آدرس: لرستان − کوهدشت − شهرک باهنر، پارک شهید بهشتی، خیابان زاگرس، پلاک ۹۲</p>
+        </li>
+        <li>
+          <i class="fa-solid fa-phone-flip text-cyan-400"></i>
+          <p>066-32621395</p>
+        </li>
+        <li>
+          <i class="fa-solid fa-mobile-screen-button text-cyan-400"></i>
+          <p dir="ltr">0916 708 7727</p>
+        </li>
+        <li>
+          <i class="fa-solid fa-clock text-cyan-400"></i>
+          <p>شنبه تا پنجشنبه: ۹ صبح تا ۹ شب</p>
+        </li>
+      </ul>
+    </section>
+  </footer>
+  <p class="text-sm my-9 text-gray-500 text-center">تمامی حقوق مادی و معنوی این وب‌سایت متعلق به پارچه سرای زاگرس می‌باشد. © ۱۴۰۴ </p>
+</footer>
