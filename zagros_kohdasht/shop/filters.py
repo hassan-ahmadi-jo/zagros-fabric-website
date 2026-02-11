@@ -22,7 +22,6 @@ class FabricFilter():
         if item_name == 'thickness':
             thickness_list = list(self.context['fabrics_data'].values_list('thickness', flat=True).distinct())
             return [self.THICKNESS_CHOICES.get(thickness) for thickness in list(dict.fromkeys(thickness_list))]
-        
         model_class = getattr(models, item_name.capitalize())
         fabric_ids = self.context['fabrics_data'].values_list('id', flat=True)
         return model_class.objects.filter(

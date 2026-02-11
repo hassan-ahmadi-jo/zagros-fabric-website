@@ -16,7 +16,11 @@
       {% for usage in usage_dict %}
         {% if forloop.counter < 5 %}
           <a href="{% url 'product_list_page' %}?usage={{ usage }}" class="flex justify-center items-center flex-col mb-2 border-gray-700 hover:border-b-2 hover:mb-1.5 hover:scale-[1.02] transition-transform duration-200">
-            <img src="{% static 'images/test.jpeg' %}" alt="نوع پارچه" class="aspect-[66%] w-85 object-cover rounded-md sm:w-90" />
+            {% if usage.thumbnail_medium %}
+              <img src="{{usage.thumbnail_medium.url}}" alt="نوع پارچه" class="aspect-[66%] w-85 object-cover rounded-md sm:w-90" />
+            {% else %}
+              <img src="{% static 'images/not_found_fabric_image.jpeg' %}" alt="نوع پارچه" class="aspect-[66%] w-85 object-cover rounded-md sm:w-90" />
+            {% endif %}
             <p class="text-2xl mt-5 mb-2 font-semibold">{{ usage }}</p>
           </a>
         {% endif %}

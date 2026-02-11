@@ -15,7 +15,7 @@
         <div class="opacity-0 pointer-events-none" id="header_ul_1_os">
           <div class="header_list_box scale-95 opacity-70 transition_01" id="header_ul_1_box">
             {% with type='pattern' %}
-              {% for title, description in pattern_dict.items %}
+              {% for product, description in pattern_dict.items %}
                 {% if forloop.counter <= 5 %}
                   {% include 'includes/header_menu_product.html' %}
                 {% endif %}
@@ -36,7 +36,7 @@
         <div class="opacity-0 pointer-events-none" id="header_ul_2_os">
           <div class="header_list_box scale-95 opacity-70 transition_01" id="header_ul_2_box">
             {% with type='usage' %}
-              {% for title, description in usage_dict.items %}
+              {% for product, description in usage_dict.items %}
                 {% if forloop.counter <= 5 %}
                   {% include 'includes/header_menu_product.html' %}
                 {% endif %}

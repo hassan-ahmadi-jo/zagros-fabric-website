@@ -1,11 +1,15 @@
 {% load static %}
-<a href="{% url 'product_list_page'%}?{{type}}={{title}}">
+<a href="{% url 'product_list_page' %}?{{ type }}={{ product }}">
   <section class="w-90 h-25 flex a_tag hover:scale-102">
-    <img src="{% static 'images/test.jpeg' %}" alt="نوع پارچه" class="h-full aspect-square object-cover rounded-md" />
+    {% if product.thumbnail_small %}
+      <img src="{{ product.thumbnail_small.url }}" alt="نوع پارچه" class="h-full aspect-square object-cover rounded-md" />
+    {% else %}
+      <img src="{% static 'images/not_found_fabric_image.jpeg' %}" alt="نوع پارچه" class="h-full aspect-square object-cover rounded-md" />
+    {% endif %}
     <div>
       <h1 class="text-xl mb-2.5 mt-2.5 mr-4 line-clamp-1">
         <i class="fa-solid fa-shirt"></i>
-        {{ title }}
+        {{ product }}
       </h1>
       <p class="mr-2 line-clamp-2 text-sm">
         {% for i in description %}
