@@ -51,14 +51,14 @@
       </div>
 
       <div class="relative">
-        <li class="header_list a_tag transition_01" id="header_serch">
+        <li class="header_list a_tag transition_01" id="header_search">
           <i class="fa-solid fa-magnifying-glass relative"></i>
           <p>جستجو</p>
         </li>
-        <div class="opacity-0 pointer-events-none" id="header_serch_os">
-          <div class="scale-95 opacity-70 transition_01 absolute top-7 left-1/2 transform -translate-x-1/2 flex flex-wrap gap-5 justify-around border-none" id="header_serch_box">
-            {% with serch_type='desktop' %}
-              {% include 'includes/header_serch_box.html' %}
+        <div class="opacity-0 pointer-events-none" id="header_search_os">
+          <div class="scale-95 opacity-70 transition_01 absolute top-7 left-1/2 transform -translate-x-1/2 flex flex-wrap gap-5 justify-around border-none" id="header_search_box">
+            {% with search_type='desktop' %}
+              {% include 'includes/header_search_box.html' %}
             {% endwith %}
           </div>
         </div>
@@ -128,13 +128,13 @@
           </section>
         </li>
         <li>
-          <section class="header_list max-w-50" id="header_serch_mobile">
+          <section class="header_list max-w-50" id="header_search_mobile">
             <i class="fa-solid fa-magnifying-glass relative"></i>
             <p>جستجو</p>
           </section>
-          <section class="mr-10 pb-7 hidden" id="header_serch_mobile_box">
-            {% with serch_type='mobile' %}
-              {% include 'includes/header_serch_box.html' %}
+          <section class="mr-10 pb-7 hidden" id="header_search_mobile_box">
+            {% with search_type='mobile' %}
+              {% include 'includes/header_search_box.html' %}
             {% endwith %}
           </section>
         </li>

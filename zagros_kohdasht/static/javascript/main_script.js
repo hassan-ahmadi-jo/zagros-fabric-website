@@ -73,12 +73,12 @@ const aply_toggle_menu = function (btn_id, menu_type) {
     toggle_menu_box_El[btn_id] = box_El
     toggle_menu_btn_El[btn_id].addEventListener('click', () => hidden_show_toggle_menu_function(btn_id, menu_type));
 }
-const header_menu_btn_os_type_id_list = ['header_ul_1', 'header_ul_2', 'header_bars', 'header_serch'];
-const header_menu_btn_basic_type_id_list = ['header_ul_1_mobile', 'header_ul_2_mobile', 'header_serch_mobile'];
-for (let btn_id of header_menu_btn_os_type_id_list){    
+const header_menu_btn_os_type_id_list = ['header_ul_1', 'header_ul_2', 'header_bars', 'header_search'];
+const header_menu_btn_basic_type_id_list = ['header_ul_1_mobile', 'header_ul_2_mobile', 'header_search_mobile'];
+for (let btn_id of header_menu_btn_os_type_id_list) {
     aply_toggle_menu(btn_id, 'os');
 }
-for (let btn_id of header_menu_btn_basic_type_id_list){    
+for (let btn_id of header_menu_btn_basic_type_id_list) {
     aply_toggle_menu(btn_id, 'basic');
 }
 
@@ -132,26 +132,37 @@ const hidden_menu_click_listener = function (event) {
 document.addEventListener('click', (event) => hidden_menu_click_listener(event));
 
 
-// serch box
-// header_clear_serch.addEventListener('click', () => document.getElementById('header_serch_box_text').value = '');
-const header_clear_serch_desktop = document.getElementById('header_clear_serch_desktop');
-const header_serch_box_text_desktop = document.getElementById('header_serch_box_text_desktop');
-header_clear_serch_desktop.addEventListener('click', () => header_serch_box_text_desktop.value = '');
-header_serch_box_text_desktop.addEventListener('input', function(){
-    if (header_serch_box_text_desktop.value == ''){
-        header_clear_serch_desktop.classList.add('!hidden');
-    } else{
-        header_clear_serch_desktop.classList.remove('!hidden');
+// search box
+const header_btn_search_desktop = document.getElementById('header_btn_search_desktop');
+const header_search_box_text_desktop = document.getElementById('header_search_box_text_desktop');
+
+header_search_box_text_desktop.addEventListener('input', function () {
+    if (header_search_box_text_desktop.value == '') {
+        header_btn_search_desktop.classList.remove('pointer-events-auto')
+        header_btn_search_desktop.classList.add('pointer-events-none')
+        header_btn_search_desktop.classList.remove('opacity-100')
+        header_btn_search_desktop.classList.add('opacity-0')
+    } else {
+        header_btn_search_desktop.classList.add('pointer-events-auto')
+        header_btn_search_desktop.classList.remove('pointer-events-none')
+        header_btn_search_desktop.classList.add('opacity-100')
+        header_btn_search_desktop.classList.remove('opacity-0')
     }
 });
 
-const header_clear_serch_mobile = document.getElementById('header_clear_serch_mobile');
-const header_serch_box_text_mobile = document.getElementById('header_serch_box_text_mobile');
-header_clear_serch_mobile.addEventListener('click', () => header_serch_box_text_mobile.value = '');
-header_serch_box_text_mobile.addEventListener('input', function(){
-    if (header_serch_box_text_mobile.value == ''){
-        header_clear_serch_mobile.classList.add('!hidden');
-    } else{
-        header_clear_serch_mobile.classList.remove('!hidden');
+const header_btn_search_mobile = document.getElementById('header_btn_search_mobile');
+const header_search_box_text_mobile = document.getElementById('header_search_box_text_mobile');
+
+header_search_box_text_mobile.addEventListener('input', function () {
+    if (header_search_box_text_mobile.value == '') {
+        header_btn_search_mobile.classList.remove('pointer-events-auto')
+        header_btn_search_mobile.classList.add('pointer-events-none')
+        header_btn_search_mobile.classList.remove('opacity-100')
+        header_btn_search_mobile.classList.add('opacity-0')
+    } else {
+        header_btn_search_mobile.classList.add('pointer-events-auto')
+        header_btn_search_mobile.classList.remove('pointer-events-none')
+        header_btn_search_mobile.classList.add('opacity-100')
+        header_btn_search_mobile.classList.remove('opacity-0')
     }
 })
