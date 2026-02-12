@@ -13,7 +13,7 @@
 
   <main class="mb-20">
     <section class="grid grid-cols-1 items-center justify-center gap-x-2 gap-y-4 mt-20 max-w-187 mx-auto sm:grid-cols-2">
-      {% for usage in usage_dict %}
+      {% for usage in usages %}
         {% if forloop.counter < 5 %}
           <a href="{% url 'product_list_page' %}?usage={{ usage }}" class="flex justify-center items-center flex-col mb-2 border-gray-700 hover:border-b-2 hover:mb-1.5 hover:scale-[1.02] transition-transform duration-200">
             {% if usage.thumbnail_medium %}

@@ -1,9 +1,9 @@
 from . import models
 
 class FabricFilter():
-    def __init__(self, context, fabrics_data, primary_filter = {}):
+    def __init__(self, fabrics_data, primary_filter = {}):
         self.filter_items = ['usage', 'color', 'material', 'pattern', 'width', 'thickness']
-        self.context = context
+        self.context = {'fabrics_data': fabrics_data}
         self.fabrics_data = fabrics_data
         self.all_filter_items = {}
         self.selectes_items = {}

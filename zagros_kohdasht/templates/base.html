@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+{% load render_partial %}
 <html lang="fa" dir="rtl">
   <head>
     <meta charset="UTF-8" />
@@ -10,14 +11,13 @@
     {% comment %} <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4" defer></script> {% endcomment %}
   </head>
   <body class="bg-gray-900 max-w-[1680px] m-auto relative text-gray-50 px-5">
-    {% include 'includes/header.html' %}
+    {% render_partial 'shop.views.HeaderPartialView' %}
+
     {% block content %}
 
     {% endblock %}
 
-    {% load static %}
-
-    {% include 'includes/footer.html' %}
+    {% render_partial 'shop.views.FooterPartialView' %}
 
     <script src="{% static 'javascript/main_script.js' %}"></script>
     {% block script %}

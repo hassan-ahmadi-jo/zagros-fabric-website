@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from . import models
 from .filters import FabricFilter
+from django.views.generic import TemplateView
 
 
 def get_usage_object(fabrics_data):
@@ -34,59 +35,64 @@ def get_pattern_object(fabrics_data):
 
     return pattern_dic
 
-def get_data(type = 0):
-    fabrics_data = models.Fabric.objects.all().order_by("-first_page")
-    pattern_dict = get_pattern_object(fabrics_data)
-    usage_dict = get_usage_object(fabrics_data)
-    if type == 0:
-        context = {
-            "fabrics_data": fabrics_data,
-            "pattern_dict": pattern_dict,
-            "usage_dict": usage_dict,
-        }
-        return context
-    if type == 1:
-        categories_list = {}
-        items_list = ['pattern', 'usage', 'material', 'color', 'width']
-        for item in items_list:
-            model_class = getattr(models, item.capitalize())
-            objects_list = model_class.objects.filter(fabric__in = fabrics_data).distinct()
-            verbose_name = model_class._meta.verbose_name
-            categories_list[item] = [verbose_name, objects_list]
-        context = {
-            "pattern_dict": pattern_dict,
-            "usage_dict": usage_dict,
-            "categories_list": categories_list
-        }
-        return context
         
 
 # Create your views here.
 def index_page(request):
-    context = get_data()
+    fabrics_data = models.Fabric.objects.all()
+    usages = models.Usage.objects.filter(fabric__in = fabrics_data).distinct().order_by('-first_page')[:5]
+    context = {'usages': usages}
     return render(request, "shop/index.html", context)
 
 def product_list_page(request):
-    context = get_data()
-    filter = FabricFilter(context, context["fabrics_data"])
+    fabrics_data = models.Fabric.objects.all().order_by('-first_page')
+    filter = FabricFilter(fabrics_data)
     context = filter.run(request)
     return render(request, "shop/product_list.html", context)
     
 
 
 def product_item_page(request, id):
-    context = get_data()
-    context["fabric"] = models.Fabric.objects.get(id=id)
+    context = {'fabric':models.Fabric.objects.get(id=id)}
     return render(request, "shop/product_item.html", context)
 
 def categories_page(request):
-    context = get_data(1)
+    fabrics_data = models.Fabric.objects.all()
+    categories_list = {}
+    items_list = ['pattern', 'usage', 'material', 'color', 'width']
+    for item in items_list:
+        model_class = getattr(models, item.capitalize())
+        objects_list = model_class.objects.filter(fabric__in = fabrics_data).distinct()
+        verbose_name = model_class._meta.verbose_name
+        categories_list[item] = [verbose_name, objects_list]
+    context = {'categories_list': categories_list}
     return render(request, 'shop/categories_page.html', context)
 
 def contact_us_page(request):
-    context = get_data()
-    return render(request, 'shop/contact_us.html', context)
+    return render(request, 'shop/contact_us.html')
 
 def address_page(request):
-    context = get_data()
-    return render(request, 'shop/address.html', context)
+    return render(request, 'shop/address.html')
+
+
+class HeaderPartialView(TemplateView):
+    template_name = 'shop/header_partial.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        fabrics_data = models.Fabric.objects.all().order_by("-first_page")
+        pattern_dict = get_pattern_object(fabrics_data)
+        usage_dict = get_usage_object(fabrics_data)
+        context['pattern_dict'] = pattern_dict
+        context['usage_dict'] = usage_dict
+        return context
+    
+class FooterPartialView(TemplateView):
+    template_name = 'shop/footer_pertial.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        fabrics_data = models.Fabric.objects.all()
+        usages = models.Usage.objects.filter(fabric__in = fabrics_data).distinct().order_by('-first_page')[:5]
+        context['usages'] = usages
+        return context
