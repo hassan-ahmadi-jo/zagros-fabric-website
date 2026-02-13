@@ -10,7 +10,7 @@ from django.utils.html import format_html
 class FabricImagesInline(admin.TabularInline):
     model = models.FabricImages
     extra = 3
-    fields = ['image']
+    fields = ['original_image']
 
 class FabricAdmin(admin.ModelAdmin):
     list_display = ['__str__', 'first_page', 'material', 'inventory', 'price', 'image_existence']
