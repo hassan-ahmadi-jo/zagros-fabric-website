@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from . import models
 from .filters import FabricFilter
 from django.views.generic import TemplateView, ListView
+from django.views import View
 
 
 def get_usage_object(fabrics_data):
@@ -110,6 +111,15 @@ class HeaderPartialView(TemplateView):
         context['pattern_dict'] = pattern_dict
         context['usage_dict'] = usage_dict
         return context
+    
+# class HeaderPartialView(View):
+#     def get(self, request):
+#         fabrics_data = models.Fabric.objects.all().order_by("-first_page")
+#         pattern_dict = get_pattern_object(fabrics_data)
+#         usage_dict = get_usage_object(fabrics_data)
+#         context = {'pattern_dict': pattern_dict, 'usage_dict': usage_dict}
+#         return render(request, 'shop/header_partial.html', context)
+        
     
 class FooterPartialView(TemplateView):
     template_name = 'shop/footer_pertial.html'

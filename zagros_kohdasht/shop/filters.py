@@ -1,4 +1,5 @@
 from . import models
+from django.http import HttpRequest
 
 class FabricFilter():
     def __init__(self, fabrics_data, primary_filter = {}):
@@ -39,8 +40,6 @@ class FabricFilter():
             if item in self.primary_filter:
                 self.selectes_items[item].extend(self.primary_filter[item])
             
-        
-    
     def get_filtered_data(self):
         for item in self.filter_items:
             if item == 'thickness' and self.selectes_items['thickness']:
@@ -74,13 +73,36 @@ class FabricFilter():
                 verbose_list.append(None)
                 
         self.context['filter_attributes'] = list(zip(all_filter_items_list, selectes_items_list, verbose_list, self.filter_items))
+        
+    def search(self, text):
+        def extracting_words_from_text(text):
+            words_list = []
+            text += ' '
+            word = ''
+            for letter in text:
+                if letter != ' ':
+                    word += letter
+                else:
+                    if len(word) > 2:
+                        words_list.append(word)
+                    word = ''
+            return words_list
+        words = extracting_words_from_text(text)
+        serch_items = ['usage', 'color', 'material', 'pattern', 'width']
+        fabrics = models.Fabric.objects.none()
+        for word in words:
+            fabrics = fabrics | models.Fabric.objects.filter(name__icontains = word)
+            for item in serch_items:
+                fabrics = fabrics | models.Fabric.objects.filter(**{f'{item}__name__icontains': word})
+        self.context['fabrics_data'] = fabrics.distinct()
             
-            
-    def run(self, request):
+    def run(self, request: HttpRequest):
         self.get_selected_items(request)
         self.context['fabrics_data'] = self.fabrics_data
         self.get_all_data_for_all_items()
         self.get_filtered_data()
         self.get_verbose_name()
         self.get_filter_attributes_data()
+        if request.GET.get('q'):
+            self.search(request.GET.get('q'))
         return self.context
