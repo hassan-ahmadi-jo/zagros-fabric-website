@@ -53,16 +53,21 @@ class IndexView(TemplateView):
 class ProductListView(ListView):
     template_name = 'shop/product_list.html'
     model = models.Fabric
-    paginate_by = 10
-    
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        fabrics_data = models.Fabric.objects.all().order_by('-first_page')
+    paginate_by = 30
+    context_object_name = 'fabrics_data'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        fabrics_data = models.Fabric.objects.all()
         filter = FabricFilter(fabrics_data)
         filter_data = filter.run(self.request)
-        for key in filter_data.keys():
-            context[key] = filter_data[key]
-        return context    
+        self._filter_data = filter_data
+        return queryset.filter(id__in = filter_data['fabrics_data']).order_by('-first_page')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['filter_attributes'] = self._filter_data['filter_attributes']
+        return context
 
 
 class ProductItemView(TemplateView):
@@ -112,13 +117,6 @@ class HeaderPartialView(TemplateView):
         context['usage_dict'] = usage_dict
         return context
     
-# class HeaderPartialView(View):
-#     def get(self, request):
-#         fabrics_data = models.Fabric.objects.all().order_by("-first_page")
-#         pattern_dict = get_pattern_object(fabrics_data)
-#         usage_dict = get_usage_object(fabrics_data)
-#         context = {'pattern_dict': pattern_dict, 'usage_dict': usage_dict}
-#         return render(request, 'shop/header_partial.html', context)
         
     
 class FooterPartialView(TemplateView):
