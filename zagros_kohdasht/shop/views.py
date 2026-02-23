@@ -67,6 +67,9 @@ class ProductListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['filter_attributes'] = self._filter_data['filter_attributes']
+        querydict = self.request.GET.copy()
+        querydict.pop('page', None)
+        context['querydict'] = querydict.urlencode()
         return context
 
 
