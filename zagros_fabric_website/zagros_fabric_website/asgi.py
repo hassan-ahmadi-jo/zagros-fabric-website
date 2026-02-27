@@ -1,5 +1,5 @@
 """
-ASGI config for zagros_kohdasht project.
+ASGI config for zagros_fabric_website project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'zagros_kohdasht.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'zagros_fabric_website.settings')
 
 application = get_asgi_application()
