@@ -2,8 +2,6 @@ from django.shortcuts import render, get_object_or_404
 from . import models
 from .filters import FabricFilter
 from django.views.generic import TemplateView, ListView
-from django.views import View
-
 
 def get_usage_object(fabrics_data):
     usage_dic = {}
