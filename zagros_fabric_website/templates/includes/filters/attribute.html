@@ -1,9 +1,20 @@
 <div class="text_filter_01 cursor-pointer mt-5" id="{{"filter_attribute_"|add:filter_item|add:size_type}}">
   <div class="flex gap-2">
     <p>{{verbose}}</p>
-    {% if selected_items|length > 0 %}
-      <p class="text-sm text-gray-500">{{selected_items|length}}</p>
+    {% if size_type == '_mobile' %}
+      {% if selected_items|length > 0 %}
+        <p class="text-sm text-gray-500">{{selected_items|length}}</p>
+      {% endif %}
+      {% else %}
+      {% comment %} <p class="text-sm text-gray-500 js-counter-{{filter_item}}{{size_type}}">{{selected_items|length}}</p> {% endcomment %}
     {% endif %}
+    <p class="text-sm text-gray-500 js-counter-{{filter_item}}{{size_type}}">{{selected_items|length}}</p>
+    
+    {% comment %} {% if selected_items|length > 0 and size_type == '_mobile'%}
+      <p class="text-sm text-gray-500">{{selected_items|length}}</p>
+      {% else %}
+      <p class="text-sm text-gray-500 js-counter-{{filter_item}}{{size_type}}"></p>
+    {% endif %} {% endcomment %}
   </div>
   <i class="fa-solid fa-caret-down"></i>
 </div>

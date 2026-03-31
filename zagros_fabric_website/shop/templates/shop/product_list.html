@@ -7,39 +7,10 @@
     <div class="hidden w-[400px] lg:block">
       {% include 'includes/filters/filter_box.html' %}
     </div>
-    <div class="flex flex-wrap p-10 w-full gap-1 items-start content-start justify-start">
-      {% for fabric in fabrics_data %}
-        {% include 'includes/product_box.html' %}
-      {% endfor %}
+    <div class="p-10 w-full" id="product_list">
+      {% include 'shop/_product_list.html' %}
     </div>
   </section>
-  {% if page_obj.paginator.num_pages > 1 %}
-    <section class="flex justify-center items-center gap-4">
-      {% if page_obj.has_previous %}
-        <a href="?page={{page_obj.previous_page_number}}&{{querydict}}" class="cursor-pointer hover:text-cyan-400/50">
-          <i class="fa-solid fa-angle-right"></i>
-        </a>
-        {% if page_obj.number > 2 %}
-          <a href="?page=1&{{querydict}}" class="px-3 py-2 rounded-lg border-2 border-gray-800 cursor-pointer hover:border-cyan-400/30">1</a>
-          {% if page_obj.number != 3 %}
-            <div>...</div>
-          {% endif %}
-        {% endif %}
-        <a href="?page={{page_obj.previous_page_number}}&{{querydict}}" class="px-3 py-2 rounded-lg border-2 border-gray-800 cursor-pointer hover:border-cyan-400/30">{{ page_obj.previous_page_number }}</a>
-      {% endif %}
-      <div class="px-3 py-2 bg-cyan-950 rounded-lg border-2 border-cyan-600 cursor-pointer">{{ page_obj.number }}</div>
-      {% if page_obj.has_next %}
-        <a href="?page={{page_obj.next_page_number}}&{{querydict}}" class="px-3 py-2 rounded-lg border-2 border-gray-800 cursor-pointer hover:border-cyan-400/30">{{ page_obj.next_page_number }}</a>
-        {% if page_obj.paginator.num_pages > page_obj.number|add:1 %}
-          {% if page_obj.paginator.num_pages != page_obj.number|add:2 %}
-            <div>...</div>
-          {% endif %}
-          <a href="?page={{page_obj.paginator.num_pages}}&{{querydict}}" class="px-3 py-2 rounded-lg border-2 border-gray-800 cursor-pointer hover:border-cyan-400/30">{{ page_obj.paginator.num_pages }}</a>
-        {% endif %}
-        <a href="?page={{page_obj.next_page_number}}&{{querydict}}" class="cursor-pointer hover:text-cyan-400/50"><i class="fa-solid fa-angle-left"></i></a>
-      {% endif %}
-    </section>
-  {% endif %}
 {% endblock %}
 {% block script %}
   <script src="{% static 'javascript/product_list.js' %}"></script>

@@ -1,26 +1,25 @@
 <section class="w-full border-2 border-gray-700 rounded-2xl mt-20 px-5 py-5">
-  <div>
-    <p class="text-2xl text-gray-400 font-bold text-center mb-5">
-      <i class="fa-solid fa-filter ml-2"></i>
+  
+  <!-- بخش هدر شامل عنوان و دکمه حذف فیلتر -->
+  <div class="flex flex-wrap items-center justify-between mb-6 pb-4 border-b border-gray-700/60">
+    <p class="text-2xl text-gray-300 font-bold m-0">
+      <i class="fa-solid fa-filter ml-2 text-gray-400"></i>
       فیلترها
     </p>
+
+    <a href="{% url 'product_list_page' %}" id="remove-filter" class="hidden items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium text-red-400 border border-red-500/30 bg-red-500/10 hover:bg-red-500 hover:text-white transition-all duration-300 cursor-pointer shadow-sm hover:shadow-red-500/30">
+      <i class="fa-solid fa-xmark"></i>
+      حذف فیلترها
+    </a>
   </div>
+
+  <!-- فرم فیلترها -->
   <form method="GET" class="text-xl text-amber-50" id="filter_form">
     {% with size_type='_desktop' %}
       {% for all_items, selected_items, verbose, filter_item in filter_attributes %}
         {% include 'includes/filters/attribute.html' %}
       {% endfor %}
     {% endwith %}
-    <div class="flex flex-wrap items-center gap-5 flex-col mt-7">
-      <button type="submit" class="px-5 py-2 border-2 rounded-2xl text-base text-green-500 cursor-pointer">
-        <i class="fa-solid fa-check"></i>
-        اعمال فیلترها
-      </button>
-
-      <a href="{% url 'product_list_page' %}" class="px-5 py-2 border-2 rounded-2xl text-base text-red-500 cursor-pointer">
-        <i class="fa-solid fa-xmark"></i>
-        حذف فیلترها
-      </a>
-    </div>
   </form>
+  
 </section>

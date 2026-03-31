@@ -50,6 +50,7 @@ class IndexView(TemplateView):
 
 class ProductListView(ListView):
     template_name = 'shop/product_list.html'
+    # template_name = 'includes/product_box.html'
     model = models.Fabric
     paginate_by = 30
     context_object_name = 'fabrics_data'
@@ -69,6 +70,11 @@ class ProductListView(ListView):
         querydict.pop('page', None)
         context['querydict'] = querydict.urlencode()
         return context
+    
+    def render_to_response(self, context, **response_kwargs):
+        if self.request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+            self.template_name = 'shop/_product_list.html'
+        return super().render_to_response(context, **response_kwargs)
 
 
 class ProductItemView(TemplateView):
